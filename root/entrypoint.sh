@@ -20,6 +20,8 @@ rm -rf * && \
 wget https://github.com/Secretmapper/combustion/archive/release.zip && \
 unzip release.zip && \
 mv combustion-release/* ./
+rm release.zip
+rmdir combustion-release
 curl https://raw.githubusercontent.com/SebDanielsson/dark-combustion/master/main.77f9cffc.css > main.77f9cffc.css
 
 # start transmission
