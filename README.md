@@ -25,7 +25,7 @@ version: '3.3'
 services:
     wireguard-transmission:
         container_name: wireguard-transmission
-        privileged: false
+        privileged: true
         environment:
             - USERNAME=transmission
             - PASSWORD=transmission
