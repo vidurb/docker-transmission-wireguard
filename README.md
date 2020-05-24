@@ -43,6 +43,7 @@ services:
 
 ## To-Do
 * Configure Transmission kill switch dynamically on container creation
+* Add multi arch support once Docker Hub automated builds supports it properly
 * Feel free to request features
 
 ## Contribute
