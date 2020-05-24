@@ -1,5 +1,5 @@
 # based on alpine linux
-FROM alpine:latest
+FROM --platform=linux/arm/v7 alpine:latest
 
 # maintainer
 LABEL maintainer "Sebastian Danielsson <sebastian.danielsson@protonmail.com>"
