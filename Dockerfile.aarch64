@@ -1,4 +1,5 @@
 # based on alpine linux
+FROM --platform=linux/arm64/v8 alpine:latest
 FROM alpine:latest
 
 # maintainer
