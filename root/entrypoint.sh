@@ -24,5 +24,12 @@ rm release.zip
 rmdir combustion-release
 curl https://raw.githubusercontent.com/SebDanielsson/dark-combustion/master/main.77f9cffc.css > main.77f9cffc.css
 
+# change rpc-username and rpc-password
+if [ ! -z "$USERNAME" ] && [ ! -z "$PASSWORD" ]; then
+	sed -i '/rpc-authentication-required/c\    "rpc-authentication-required": true,' /etc/transmission-daemon/settings.json
+	sed -i "/rpc-username/c\    \"rpc-username\": \"$USERNAME\"," /etc/transmission-daemon/settings.json
+	sed -i "/rpc-password/c\    \"rpc-password\": \"$PASSWORD\"," /etc/transmission-daemon/settings.json
+fi
+
 # start transmission
 exec /usr/bin/transmission-daemon --foreground --config-dir /etc/transmission-daemon
