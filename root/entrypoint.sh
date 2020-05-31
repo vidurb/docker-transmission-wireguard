@@ -16,8 +16,10 @@ fi
 
 # make transmission only use the wireguard interface
 if [ ! -z "$KILLSWITCH" ]; then
-	WIREGUARDIP=$(ip -f inet addr show "$KILLSWITCH" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-	sed -i "/bind-address-ipv4/c\    \"bind-address-ipv4\": \"$WIREGUARDIP\"," /etc/transmission-daemon/settings.json
+	WIREGUARDIPV4=$(ip addr show "$KILLSWITCH" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+	WIREGUARDIPV6=$(ip addr show "$KILLSWITCH" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d')
+	sed -i "/bind-address-ipv4/c\    \"bind-address-ipv4\": \"$WIREGUARDIPV4\"," /etc/transmission-daemon/settings.json
+	sed -i "/bind-address-ipv6/c\    \"bind-address-ipv6\": \"$WIREGUARDIPV6\"," /etc/transmission-daemon/settings.json
 fi
 
 # download Secretmapper/combustion, a great looking transmisison web interface, then apply SebDanielsson/dark-combustion, dark theme for combustion
