@@ -3,15 +3,21 @@
 # check for wireguard config, then start wireguard
 cd /etc/wireguard
 
-if [ ! -f wg0.conf ]
+if [ ! -f /etc/wireguard/"$INTERFACE".conf ]
 then
-  echo "Could not find wg0.conf."
+  echo "Could not find /etc/wireguard/"$INTERFACE".conf"
 fi
 
-if [ -f wg0.conf ]
+if [ -f /etc/wireguard/"$INTERFACE".conf ]
 then
-    chmod 600 wg0.conf
-    wg-quick up wg0
+    chmod 600 /etc/wireguard/"$INTERFACE".conf
+    wg-quick up "$INTERFACE"
+fi
+
+# make transmission only use the wireguard interface
+if [ ! -z "$KILLSWITCH" ]; then
+	WIREGUARDIP=$(ip -f inet addr show "$KILLSWITCH" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+	sed -i "/bind-address-ipv4/c\    \"bind-address-ipv4\": \"$WIREGUARDIP\"," /etc/transmission-daemon/settings.json
 fi
 
 # download Secretmapper/combustion, a great looking transmisison web interface, then apply SebDanielsson/dark-combustion, dark theme for combustion
