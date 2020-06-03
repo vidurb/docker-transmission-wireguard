@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # check for wireguard config, then start wireguard
-cd /etc/wireguard
-
 if [ ! -f /etc/wireguard/"$INTERFACE".conf ]
 then
   echo "Could not find /etc/wireguard/"$INTERFACE".conf"
