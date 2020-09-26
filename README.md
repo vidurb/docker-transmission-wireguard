@@ -3,8 +3,8 @@ Docker image for running Transmission over a WireGuard connection, based on Alpi
 
 [![GitHub](https://img.shields.io/badge/github-blue?style=flat&color=grey&logo=GitHub)](https://github.com/SebDanielsson/docker-wireguard-transmission)
 [![GitHub stars](https://img.shields.io/github/stars/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/network)
 [![GitHub issues](https://img.shields.io/github/issues/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/issues)
+[![GitHub forks](https://img.shields.io/github/forks/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/network)
 [![GitHub license](https://img.shields.io/github/license/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/blob/master/LICENSE)
 
 [![Docker](https://img.shields.io/badge/docker-blue?style=flat&color=grey&logo=docker)](https://hub.docker.com/r/sebdanielsson/wireguard-transmission)
