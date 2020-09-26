@@ -1,5 +1,16 @@
 # docker-wireguard-transmission
-Docker image for running Transmission over a WireGuard connection, based on Alpine Linux
+Docker image for running Transmission over a WireGuard connection, based on Alpine Linux.
+
+[![GitHub](https://img.shields.io/badge/wireguard-transmission-blue?style=flat&color=grey&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission)
+[![GitHub stars](https://img.shields.io/github/stars/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/network)
+[![GitHub issues](https://img.shields.io/github/issues/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/issues)
+[![GitHub license](https://img.shields.io/github/license/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/SebDanielsson/docker-wireguard-transmission/blob/master/LICENSE)
+
+[![Docker](https://img.shields.io/badge/wireguard-transmission-blue?style=flat&color=grey&logo=docker)](https://hub.docker.com/r/sebdanielsson/wireguard-transmission)
+![Docker Stars](https://img.shields.io/docker/stars/sebdanielsson/wireguard-transmission?style=flat&color=blue&logo=docker&label=stars)
+![Docker Pulls](https://img.shields.io/docker/pulls/sebdanielsson/wireguard-transmission?style=flat&color=blue&logo=docker&label=pulls)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/sebdanielsson/wireguard-transmission?style=flat&color=blue&logo=docker&label=build)
 
 ## Changelog
 **2020-06-01:** First release, most notable change since initial upload is the addition of two environemnt variables *INTERFACE* and *KILLSWITCH*. Read more about these in the usage section below.
