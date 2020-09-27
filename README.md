@@ -39,7 +39,7 @@ sebdanielsson/wireguard-transmission
 
 ### docker-compose.yml
 ```
-version: '3.3'
+version: '3.7'
 services:
     wireguard-transmission:
         container_name: wireguard-transmission
