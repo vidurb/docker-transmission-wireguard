@@ -1,0 +1,57 @@
+#!/usr/bin/with-contenv sh
+
+if [ -n "$PUID" ] && [ ! "$(id -u twg_user)" -eq "$PUID" ]; then
+    usermod -o -u "$PUID" twg_user;
+fi
+if [ -n "$PGID" ] && [ ! "$(id -g twg_user)" -eq "$PGID" ]; then
+    groupmod -o -g "$PGID" twg_user;
+fi
+
+# Make sure directories exist before chown and chmod
+mkdir -p /config \
+    ${TRANSMISSION_HOME} \
+    ${TRANSMISSION_DOWNLOAD_DIR} \
+    ${TRANSMISSION_INCOMPLETE_DIR} \
+    ${TRANSMISSION_WATCH_DIR}
+
+echo "Enforcing ownership on transmission config directories"
+chown -R twg_user:twg_user \
+    /config \
+    /usr/share/transmission/web \
+    ${TRANSMISSION_HOME}
+
+echo "Applying permissions to transmission config directories"
+chmod -R go=rX,u=rwX \
+    /config \
+    /usr/share/transmission/web \
+    ${TRANSMISSION_HOME}
+
+if [ "$GLOBAL_APPLY_PERMISSIONS" = true ] ; then
+    echo "Setting owner for transmission paths to ${PUID}:${PGID}"
+    chown -R twg_user:twg_user \
+        ${TRANSMISSION_DOWNLOAD_DIR} \
+        ${TRANSMISSION_INCOMPLETE_DIR} \
+        ${TRANSMISSION_WATCH_DIR}
+
+    echo "Setting permission for files (644) and directories (755)"
+    chmod -R go=rX,u=rwX \
+        ${TRANSMISSION_DOWNLOAD_DIR} \
+        ${TRANSMISSION_INCOMPLETE_DIR} \
+
+    echo "Setting permission for watch directory (775) and its files (664)"
+    chmod -R o=rX,ug=rwX \
+        ${TRANSMISSION_WATCH_DIR}
+fi
+
+echo "
+-------------------------------------
+Transmission will run as
+-------------------------------------
+User name:   twg_user
+User uid:    $(id -u twg_user)
+User gid:    $(id -g twg_user)
+-------------------------------------
+"
+
+export PUID
+export PGID

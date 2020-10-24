@@ -1,0 +1,12 @@
+#!/usr/bin/with-contenv sh
+echo "
+-------------------------------------
+Testing environment passthrough
+-------------------------------------
+TRANSMISSION_DOWNLOAD_DIR: ${TRANSMISSION_DOWNLOAD_DIR}
+TRANSMISSION_INCOMPLETE_DIR: ${TRANSMISSION_INCOMPLETE_DIR}
+TRANSMISSION_RPC_WHITELIST_ENABLED: ${TRANSMISSION_RPC_WHITELIST_ENABLED}
+-------------------------------------
+"
+export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+s6-setuidgid twg_user transmission-daemon --foreground
