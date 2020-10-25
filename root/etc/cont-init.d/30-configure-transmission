@@ -5,6 +5,9 @@
 if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -n "$OVERWRITE_CONFIGURATION" ]; then
   echo "Transmission configuration file not generated as a file exists at $TRANSMISSION_HOME/settings.json"
 else
+  if [ ! -d "$TRANSMISSION_HOME" ]; then 
+    mkdir -p "${TRANSMISSION_HOME}"
+  fi
   dockerize -template /etc/transmission/settings.tmpl:/data/transmission-home/settings.json
   echo "Transmission configuration file generated at $TRANSMISSION_HOME/settings.json"
 fi
