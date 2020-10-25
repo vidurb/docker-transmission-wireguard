@@ -1,5 +1,14 @@
 FROM alpine:latest
 
+ARG BUILD_DATE
+ARG SOURCE_BRANCH
+
+LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.vcs-ref=$SOURCE_BRANCH
+LABEL org.label-schema.url=https://github.com/vidurb/docker-wireguard-transmission
+LABEL org.label-schema.name=wireguard-transmission
+
 ARG ARCH
 ENV ARCH=${ARCH:-amd64} \
     DOCKERIZE_VERSION=v0.6.1 \

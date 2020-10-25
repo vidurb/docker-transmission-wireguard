@@ -1,4 +1,25 @@
-# docker-wireguard-transmission
+# wireguard-transmission
+
+[![GitHub](https://img.shields.io/badge/github-blue?style=flat&color=grey&logo=GitHub)](https://github.com/vidurb/docker-wireguard-transmission)
+[![GitHub stars](https://img.shields.io/github/stars/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/vidurb/docker-wireguard-transmission/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/vidurb/docker-wireguard-transmission/issues)
+[![GitHub forks](https://img.shields.io/github/forks/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/vidurb/docker-wireguard-transmission/network)
+[![GitHub license](https://img.shields.io/github/license/SebDanielsson/docker-wireguard-transmission?style=flat&color=blue&logo=github)](https://github.com/vidurb/docker-wireguard-transmission/blob/master/LICENSE)
+
+[![Docker](https://img.shields.io/badge/docker-blue?style=flat&color=grey&logo=docker)](https://hub.docker.com/r/vidurb/wireguard-transmission)
+![Docker Stars](https://img.shields.io/docker/stars/vidurb/wireguard-transmission?style=flat&color=blue&logo=docker&label=stars)
+![Docker Pulls](https://img.shields.io/docker/pulls/vidurb/wireguard-transmission?style=flat&color=blue&logo=docker&label=pulls)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/vidurb/wireguard-transmission?style=flat&color=blue&logo=docker&label=build)
+
+This is a fork of SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission) that adds some features with help from Haugene's [OpenVPN+Transmission image](https://github.com/haugene/docker-transmission-openvpn).
+
+Additions:
+- Added S6 overlay
+- Added generation of the Transmission settings file from environment variables as used in Haugene's image.
+- Run transmission as a non-root user by default and let the user specify the UID and GID (this is why I forked)
+
+
+# Original README from SebDanielsson/docker-wireguard-transmission
 Docker image for running Transmission over a WireGuard connection, based on Alpine Linux.
 
 [![GitHub](https://img.shields.io/badge/github-blue?style=flat&color=grey&logo=GitHub)](https://github.com/SebDanielsson/docker-wireguard-transmission)
