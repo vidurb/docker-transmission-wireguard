@@ -1,5 +1,15 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
 
+RUN_AS=root
+if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
+  RUN_AS=twg_user;
+fi
+
 export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-s6-setuidgid twg_user transmission-daemon --foreground
+
+if [ "$RUN_AS" = root ]; then
+    transmission-daemon --foreground
+else
+    s6-setuidgid "$RUN_AS" transmission-daemon --foreground
+fi
