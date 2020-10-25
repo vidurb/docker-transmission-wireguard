@@ -4,7 +4,7 @@
 # check for wireguard config, then start wireguard
 if [ ! -f /etc/wireguard/"$INTERFACE".conf ]
 then
-  echo "Could not find /etc/wireguard/"$INTERFACE".conf"
+  echo "Could not find /etc/wireguard/$INTERFACE.conf"
   exit 1
 fi
 
@@ -15,7 +15,7 @@ then
 fi
 
 # make transmission only use the wireguard interface
-if [ ! -z "$KILLSWITCH" ]; then
+if [ -n "$KILLSWITCH" ]; then
 	WIREGUARDIPV4=$(ip addr show "$KILLSWITCH" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
 	WIREGUARDIPV6=$(ip addr show "$KILLSWITCH" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d')
   export TRANSMISSION_BIND_ADDRESS_IPV4=$WIREGUARDIPV4
