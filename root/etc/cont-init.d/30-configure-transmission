@@ -1,8 +1,12 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
 
+if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -n "$OVERWRITE_CONFIGURATION" ]; then
+  echo "Transmission configuration file not generated as a file exists at $TRANSMISSION_HOME/settings.json"
+else
+  dockerize -template /etc/transmission/settings.tmpl:/data/transmission-home/settings.json
+  echo "Transmission configuration file generated at $TRANSMISSION_HOME/settings.json"
+fi
+
 dockerize -template /etc/transmission/environment-variables.tmpl:/etc/transmission/environment-variables.sh
-
-dockerize -template /etc/transmission/settings.tmpl:/data/transmission-home/settings.json
-
 chmod 700 /etc/transmission/environment-variables.sh
