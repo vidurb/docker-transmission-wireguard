@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - master
+      - build-with-github-actions
 
 jobs:
   multi:
