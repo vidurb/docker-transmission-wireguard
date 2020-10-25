@@ -2,6 +2,7 @@ FROM alpine:latest
 
 ARG BUILD_DATE
 ARG SOURCE_BRANCH
+ENV BUILD_DATE $BUILD_DATE
 
 LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
 LABEL org.label-schema.build-date=$BUILD_DATE
