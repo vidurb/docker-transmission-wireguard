@@ -1,4 +1,5 @@
 #!/usr/bin/with-contenv sh
+# shellcheck shell=sh
 
 dockerize -template /etc/transmission/environment-variables.tmpl:/etc/transmission/environment-variables.sh
 
