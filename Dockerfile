@@ -35,6 +35,14 @@ ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKE
 ENV S6_FILENAME s6-overlay-aarch64.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
 
+FROM base as base-386
+
+ENV DOCKERIZE_FILENAME dockerize-linux-386-${DOCKERIZE_VERSION}.tar.gz
+ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
+ENV S6_FILENAME s6-overlay-x86.tar.gz
+ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
+
+
 ARG TARGETARCH
 ARG TARGETVARIANT
 FROM base-${TARGETARCH}${TARGETVARIANT}
