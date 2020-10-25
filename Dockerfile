@@ -1,29 +1,54 @@
-FROM alpine:latest
-
-ARG BUILD_DATE
-ARG VCS_REF
+FROM --platform=$TARGETPLATFORM alpine:latest as base
 
 LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
-LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.url=https://github.com/vidurb/docker-wireguard-transmission
 LABEL org.label-schema.name=wireguard-transmission
 
-ARG ARCH
-ENV ARCH=${ARCH:-amd64} \
-    DOCKERIZE_VERSION=v0.6.1 \
+ENV DOCKERIZE_VERSION=v0.6.1 \
     S6_VERSION=v2.1.0.2
 
-ADD https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-alpine-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz /
+FROM base as base-amd64
 
-ADD https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${ARCH}.tar.gz /
+ENV DOCKERIZE_FILENAME dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz
+ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
+ENV S6_FILENAME s6-overlay-amd64.tar.gz
+ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
+
+FROM base as base-armv6
+
+ENV DOCKERIZE_FILENAME dockerize-linux-armel-${DOCKERIZE_VERSION}.tar.gz
+ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
+ENV S6_FILENAME s6-overlay-arm.tar.gz
+ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
+
+FROM base as base-armv7
+
+ENV DOCKERIZE_FILENAME dockerize-linux-armhf-${DOCKERIZE_VERSION}.tar.gz
+ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
+ENV S6_FILENAME s6-overlay-armhf.tar.gz
+ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
+
+FROM base as base-arm64
+
+ENV DOCKERIZE_FILENAME dockerize-linux-armhf-${DOCKERIZE_VERSION}.tar.gz
+ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
+ENV S6_FILENAME s6-overlay-aarch64.tar.gz
+ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
+
+ARG TARGETARCH
+ARG TARGETVARIANT
+FROM base-${TARGETARCH}${TARGETVARIANT}
+
+ADD ${S6_URL} /
+
+ADD ${DOCKERIZE_URL} /
 
 ADD https://github.com/Secretmapper/combustion/archive/release.zip /
 
-RUN tar xzvf s6-overlay-${ARCH}.tar.gz \
-    && rm s6-overlay-${ARCH}.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz \
-    && rm dockerize-alpine-linux-${ARCH}-${DOCKERIZE_VERSION}.tar.gz \
+RUN tar xzvf ${S6_FILENAME} \
+    && rm ${S6_FILENAME} \
+    && tar -C /usr/local/bin -xzvf ${DOCKERIZE_FILENAME} \
+    && rm ${DOCKERIZE_FILENAME} \
     && apk add --no-cache --update wireguard-tools transmission-daemon unzip \
     && rm -rf /usr/share/transmission/web/* \
     && unzip /release.zip \
