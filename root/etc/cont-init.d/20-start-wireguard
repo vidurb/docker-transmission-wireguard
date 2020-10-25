@@ -12,7 +12,14 @@ fi
 if [ -f /etc/wireguard/"$INTERFACE".conf ]
 then
     chmod 600 /etc/wireguard/"$INTERFACE".conf
-    wg-quick up "$INTERFACE"
+    if ! wg-quick up "$INTERFACE";
+    then
+      echo "
+      wg-quick was unable to create the interface. 
+      Please see the logs above
+      "
+      exit 1
+    fi
 fi
 
 # make transmission only use the wireguard interface
