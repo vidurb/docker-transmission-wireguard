@@ -1,12 +1,11 @@
 FROM alpine:latest
 
 ARG BUILD_DATE
-ARG SOURCE_BRANCH
-ENV BUILD_DATE $BUILD_DATE
+ARG VCS_REF
 
 LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
 LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL org.label-schema.vcs-ref=$SOURCE_BRANCH
+LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.url=https://github.com/vidurb/docker-wireguard-transmission
 LABEL org.label-schema.name=wireguard-transmission
 
