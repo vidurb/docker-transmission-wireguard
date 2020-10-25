@@ -1,5 +1,8 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
+# Mostly copied from https://github.com/haugene/docker-transmission-openvpn/blob/e3d27e8172fb50e1532f01a24420a34899285ae7/transmission/userSetup.sh, 
+# which was itself pulled from https://github.com/linuxserver/docker-baseimage-alpine/blob/3eb7146a55b7bff547905e0d3f71a26036448ae6/root/etc/cont-init.d/10-adduser
+
 
 if [ -n "$PUID" ] && [ ! "$(id -u twg_user)" -eq "$PUID" ]; then
     usermod -o -u "$PUID" twg_user;

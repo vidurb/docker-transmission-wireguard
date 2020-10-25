@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
+# Copied from the entrypoint in upstream image (sebdanielsson/docker-wireguard-transmission)
 
 # check for wireguard config, then start wireguard
 if [ ! -f /etc/wireguard/"$INTERFACE".conf ]

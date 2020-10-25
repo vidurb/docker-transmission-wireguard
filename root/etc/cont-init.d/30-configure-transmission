@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
+# Contents based on small bit from https://github.com/haugene/docker-transmission-openvpn/blob/e3d27e8172fb50e1532f01a24420a34899285ae7/transmission/start.sh
 
 if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -n "$OVERWRITE_CONFIGURATION" ]; then
   echo "Transmission configuration file not generated as a file exists at $TRANSMISSION_HOME/settings.json"
