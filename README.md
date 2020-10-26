@@ -7,7 +7,7 @@ A Docker/OCI image running the Transmission BitTorrent client through a WireGuar
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
 and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
 
-WireGuard is copyright of Jason A. Donenfeld.
+WireGuard is a registered trademark of Jason A. Donenfeld.
 
 ~~Warning: This image is currently under active development and is not fully tested.
 This warning will be removed once the image is tested. In the meantime, please open
