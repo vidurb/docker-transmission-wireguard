@@ -1,4 +1,4 @@
-name: build
+name: build-release
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  multi:
+  build:
     runs-on: ubuntu-latest
     steps:
       -
