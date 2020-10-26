@@ -26,6 +26,6 @@ fi
 if [ -n "$KILLSWITCH" ]; then
 	WIREGUARDIPV4=$(ip addr show "$INTERFACE" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
 	WIREGUARDIPV6=$(ip addr show "$INTERFACE" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d')
-  export TRANSMISSION_BIND_ADDRESS_IPV4=$WIREGUARDIPV4
-  export TRANSMISSION_BIND_ADDRESS_IPV6=$WIREGUARDIPV6
+  export WIREGUARDIPV4
+  export WIREGUARDIPV6
 fi
