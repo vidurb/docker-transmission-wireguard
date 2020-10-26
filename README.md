@@ -1,6 +1,7 @@
 # wireguard-transmission
 
 A Docker/OCI image running the Transmission BitTorrent client through a WireGuard tunnel.
+![View on DockerHub](https://img.shields.io/static/v1?label=DockerHub&message=View&color=blue&logo=docker&style=social)
 
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
 and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
