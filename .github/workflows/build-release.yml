@@ -46,4 +46,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/wireguard-transmission:${{ steps.get_version.outputs.VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/wireguard-transmission:latest
             ghcr.io/${{ github.repository_owner }}/wireguard-transmission:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/${{ github.repository_owner }}/wireguard-transmission:latest
+
