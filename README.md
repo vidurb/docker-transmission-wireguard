@@ -12,10 +12,10 @@ an issue if you encounter any bugs.
 
 Built using GitHub Actions: 
 
-![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-release?label=Versioned%20Build&style=social&logo=githubactions)
+![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-release?label=Versioned%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/vidurb/wireguard-transmission?sort=semver&style=social&logo=docker)
 
-![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-develop?label=Development%20Build&style=social&logo=githubactions)
+![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-develop?label=Development%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/wireguard-transmission?sort=date&style=social&logo=docker)
 
 ## Features:
