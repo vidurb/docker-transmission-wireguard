@@ -21,11 +21,3 @@ then
       exit 1
     fi
 fi
-
-# make transmission only use the wireguard interface
-if [ -n "$KILLSWITCH" ]; then
-	WIREGUARDIPV4=$(ip addr show "$INTERFACE" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
-	WIREGUARDIPV6=$(ip addr show "$INTERFACE" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d')
-  export WIREGUARDIPV4
-  export WIREGUARDIPV6
-fi

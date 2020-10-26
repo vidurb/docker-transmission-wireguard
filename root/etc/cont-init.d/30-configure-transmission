@@ -2,19 +2,22 @@
 # shellcheck shell=sh
 # Contents based on small bit from https://github.com/haugene/docker-transmission-openvpn/blob/e3d27e8172fb50e1532f01a24420a34899285ae7/transmission/start.sh
 
-echo "
 
-  BIND_IPV4 = $WIREGUARDIPV4
-  BIND_IPV6 = $WIREGUARDIPV6 
-
-"
+# make transmission only use the wireguard interface
 if [ -n "$KILLSWITCH" ]; then
+	WIREGUARDIPV4=$(ip addr show "$INTERFACE" | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+	WIREGUARDIPV6=$(ip addr show "$INTERFACE" | sed -e's/^.*inet6 \([^ ]*\)\/.*$/\1/;t;d')
   TRANSMISSION_BIND_ADDRESS_IPV4=$WIREGUARDIPV4
   TRANSMISSION_BIND_ADDRESS_IPV6=$WIREGUARDIPV6
   export TRANSMISSION_BIND_ADDRESS_IPV4
   export TRANSMISSION_BIND_ADDRESS_IPV6
+  echo "
+  WIREGUARDIPV4 = $WIREGUARDIPV4
+  WIREGUARDIPV6 = $WIREGUARDIPV6 
+  TRANSMISSION_BIND_ADDRESS_IPV4 = $TRANSMISSION_BIND_ADDRESS_IPV4
+  TRANSMISSION_BIND_ADDRESS_IPV6 = $TRANSMISSION_BIND_ADDRESS_IPV6 
+  "
 fi
-
 
 if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -n "$OVERWRITE_CONFIGURATION" ]; then
   echo "Transmission configuration file not generated as a file exists at $TRANSMISSION_HOME/settings.json"
