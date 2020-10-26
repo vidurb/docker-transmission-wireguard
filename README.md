@@ -8,9 +8,15 @@ and with Haugene's [image](https://github.com/haugene/docker-transmission-openvp
 
 WireGuard is copyright of Jason A. Donenfeld.
 
-Warning: This image is currently under active development and is not fully tested.
+~~Warning: This image is currently under active development and is not fully tested.
 This warning will be removed once the image is tested. In the meantime, please open
-an issue if you encounter any bugs.
+an issue if you encounter any bugs.~~
+
+This image is now tested and working, and as such the first version has been released. 
+Right now I've only tested it on `amd64` because that's all I have access to; if you
+have used the image on a different architecture and it works please do let me know by filing an issue.
+A friend with access to a Raspberry Pi has agreed to test it on `arm64`, so I hope
+to have that confirmed soon.
 
 Built using GitHub Actions: 
 
@@ -58,6 +64,14 @@ configuration directory is `/data/transmission-home`. Please adjust the mounts
 in the examples below accordingly if you choose to change the structure.
 * Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
 required to be set for the WireGuard tunnel to work.
+* Also, in order for the container's web UI to be accessible from other docker 
+containers or your local network, you may need to add something similar to the 
+following to your wireguard configuration.
+
+```
+PostUp = DROUTE=$(ip route | grep default | awk '{print $3}'); HOMENET=192.168.0.0/16; HOMENET2=10.0.0.0/8; HOMENET3=172.16.0.0/12; ip route add $HOMENET3 via $DROUTE;ip route add $HOMENET2 via $DROUTE; ip route add $HOMENET via $DROUTE;iptables -I OUTPUT -d $HOMENET -j ACCEPT;iptables -A OUTPUT -d $HOMENET2 -j ACCEPT; iptables -A OUTPUT -d $HOMENET3 -j ACCEPT;  iptables -A OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
+PreDown = HOMENET=192.168.0.0/16; HOMENET2=10.0.0.0/8; HOMENET3=172.16.0.0/12; ip route del $HOMENET3 via $DROUTE;ip route del $HOMENET2 via $DROUTE; ip route del $HOMENET via $DROUTE; iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT; iptables -D OUTPUT -d $HOMENET -j ACCEPT; iptables -D OUTPUT -d $HOMENET2 -j ACCEPT; iptables -D OUTPUT -d $HOMENET3 -j ACCEPT
+```
 
 ### docker run
 ```
