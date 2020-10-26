@@ -15,6 +15,3 @@ fi
 if [ "$TRANSMISSION_WATCH_DIR_ENABLED" = "true" ] && [ ! -d "$TRANSMISSION_WATCH_DIR" ]; then
   mkdir "$TRANSMISSION_WATCH_DIR"
 fi
-
-dockerize -template /etc/transmission/environment-variables.tmpl:/etc/transmission/environment-variables.sh
-chmod 700 /etc/transmission/environment-variables.sh
