@@ -1,6 +1,7 @@
 # wireguard-transmission
 
 A Docker/OCI image running the Transmission BitTorrent client through a WireGuard tunnel.
+
 ![View on DockerHub](https://img.shields.io/static/v1?label=DockerHub&message=View&color=blue&logo=docker&style=social)
 
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
@@ -30,7 +31,7 @@ Built using GitHub Actions:
 - Runs `transmission-daemon` (latest version) on Alpine Linux
 - WireGuard tunnel is set up using `wg-quick` & a mounted configuration file
 - Uses the [combustion](https://github.com/Secretmapper/combustion) web UI and the excellent [dark theme](https://github.com/SebDanielsson/dark-combustion) for the same.
-- Can `transmission-daemon` as a non-root user with custom UID and GID.
+- Can run `transmission-daemon` as a non-root user with custom UID and GID.
 - Built for multiple architectures (Warning! Only the amd64 images are tested at
 this point in time)
 - Generates the transmission configuration file from environment variables (as
@@ -171,9 +172,9 @@ services:
 | TRANSMISSION_RPC_HOST_WHITELIST_ENABLED  | false  | Enable RPC host whitelist |
 | TRANSMISSION_RPC_PASSWORD  | password  | RPC password |
 | TRANSMISSION_RPC_PORT  | 9091  | RPC port |
-| TRANSMISSION_RPC_URL  | /transmission/  | RPC URL prefix |
+| TRANSMISSION_RPC_URL  | /transmission/  | RPC URL prefix - do not change this, there is a [bug in Combustion](https://github.com/Secretmapper/combustion/issues/52) |
 | TRANSMISSION_RPC_USERNAME  | username  | RPC username |
-| TRANSMISSION_RPC_WHITELIST  | 127.0.0.1  | Comma-delimited list of IP addresses. Wildcards allowed using '*'. |
+| TRANSMISSION_RPC_WHITELIST  | 127.0.0.1  | Comma-delimited list of IP addresses. Wildcards allowed using '\*'. |
 | TRANSMISSION_RPC_WHITELIST_ENABLED  | false  | Enable RPC whitelist (all connections allowed if disabled) |
 | TRANSMISSION_SCRAPE_PAUSED_TORRENTS_ENABLED  | true  | Whether to scrape paused torrents |
 | TRANSMISSION_SCRIPT_TORRENT_DONE_ENABLED  | false  | Run a script at torrent completion |
