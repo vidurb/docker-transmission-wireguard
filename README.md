@@ -6,6 +6,8 @@ A Docker/OCI image running the Transmission BitTorrent client through a WireGuar
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
 and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
 
+WireGuard is copyright of Jason A. Donenfeld.
+
 Warning: This image is currently under active development and is not fully tested.
 This warning will be removed once the image is tested. In the meantime, please open
 an issue if you encounter any bugs.
@@ -28,8 +30,8 @@ this point in time)
 - Generates the transmission configuration file from environment variables (as
 described below).
 
-### In progress:
-- Test whether the image can be run without `privileged` mode by using `cap_add`
+### To-Do:
+- [x] Test whether the image can be run without `privileged` mode by using `cap_add`
 to add specific capabilities for greater security.
 
 ## Usage
@@ -54,15 +56,18 @@ runs through the WireGuard tunnel.
 * By default, download-related folders are in `/data` and transmission's
 configuration directory is `/data/transmission-home`. Please adjust the mounts
 in the examples below accordingly if you choose to change the structure.
+* Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
+required to be set for the WireGuard tunnel to work.
 
 ### docker run
 ```
 docker run --name wireguard-transmission \
---privileged \
+--cap-add=NET_ADMIN \
+--sysctl net.ipv4.conf.all.src_valid_mark=1 \
 -e "TRANSMISSION_RPC_USERNAME=transmission" \
 -e "TRANSMISSION_RPC_PASSWORD=transmission" \
 -e "INTERFACE=wg0" \
--e "KILLSWITCH=wg0" \
+-e "KILLSWITCH=yes" \
 -p 51820:51820/udp \
 -p 9091:9091 \
 -v /path/to/wg-conf-dir:/etc/wireguard \
@@ -77,12 +82,15 @@ services:
     wireguard-transmission:
         image: vidurb/wireguard-transmission
         container_name: wireguard-transmission
-        privileged: true
         environment:
             - TRANSMISSION_RPC_USERNAME=transmission
             - TRANSMISSION_RPC_PASSWORD=transmission
             - INTERFACE=wg0
-            - KILLSWITCH=wg0
+            - KILLSWITCH=yes
+        cap_add:
+            - NET_ADMIN
+        sysctls:
+            - net.ipv4.conf.all.src_valid_mark=1
         ports:
             - '51820:51820/udp'
             - '9091:9091'
