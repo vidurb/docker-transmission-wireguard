@@ -1,4 +1,4 @@
-FROM --platform=$TARGETPLATFORM alpine:latest as base
+FROM --platform=$TARGETPLATFORM alpine:3.12 as base
 
 LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
 LABEL org.label-schema.url=https://github.com/vidurb/docker-wireguard-transmission

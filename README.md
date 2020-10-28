@@ -1,31 +1,17 @@
-# wireguard-transmission
+# transmission-wireguard
 
 A Docker/OCI image running the Transmission BitTorrent client through a WireGuard tunnel.
 
-![View on DockerHub](https://img.shields.io/static/v1?label=DockerHub&message=View&color=blue&logo=docker&style=social)
-
-Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
-and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
-
-WireGuard is a registered trademark of Jason A. Donenfeld.
-
-~~Warning: This image is currently under active development and is not fully tested.
-This warning will be removed once the image is tested. In the meantime, please open
-an issue if you encounter any bugs.~~
-
-This image is now tested and working, and as such the first version has been released. 
-Right now I've only tested it on `amd64` because that's all I have access to; if you
-have used the image on a different architecture and it works please do let me know by filing an issue.
-A friend with access to a Raspberry Pi has agreed to test it on `arm64`, so I hope
-to have that confirmed soon.
+This image is currently only tested on the `amd64` architecture.
+Please exercise caution when using it on other architectures.
 
 Built using GitHub Actions: 
 
 ![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-release?label=Versioned%20Build&style=social&logo=github-actions)
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/vidurb/wireguard-transmission?sort=semver&style=social&logo=docker)
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=semver&style=social&logo=docker)
 
 ![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-develop?label=Development%20Build&style=social&logo=github-actions)
-![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/wireguard-transmission?sort=date&style=social&logo=docker)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=date&style=social&logo=docker)
 
 ## Features:
 - Runs `transmission-daemon` (latest version) on Alpine Linux
@@ -36,6 +22,7 @@ Built using GitHub Actions:
 this point in time)
 - Generates the transmission configuration file from environment variables (as
 described below).
+- Can be run with the `cap_add` and `sysctls` directive instead of `privileged`.
 
 ### To-Do:
 - [x] Test whether the image can be run without `privileged` mode by using `cap_add`
@@ -195,3 +182,9 @@ services:
 | TRANSMISSION_HOME  | /data/transmission-home  | Transmission home dir |
 | TRANSMISSION_WATCH_DIR_FORCE_GENERIC  | false  | Force scanning of watch dir every 10 seconds (use if the watch dir is not working) |
 
+# Acknowledgements
+
+Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
+and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
+
+WireGuard is a registered trademark of Jason A. Donenfeld, who is a BAMF for making it.
