@@ -52,6 +52,9 @@ configuration directory is `/data/transmission-home`. Please adjust the mounts
 in the examples below accordingly if you choose to change the structure.
 * Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
 required to be set for the WireGuard tunnel to work.
+* If your WireGuard configuration tunnels IPv6 traffic as well, you may encounter problems.
+The simplest solution is to simply remove `::/0` from your WireGuard configuration. I'm working
+on an alternative.
 * Also, in order for the container's web UI to be accessible from other docker 
 containers or your local network, you may need to add something similar to the 
 following to your wireguard configuration.
