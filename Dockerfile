@@ -70,7 +70,7 @@ ADD https://raw.githubusercontent.com/SebDanielsson/dark-combustion/master/main.
 
 COPY root/ .
 
-EXPOSE 9091
+EXPOSE 9091 51820/udp
 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     GLOBAL_APPLY_PERMISSIONS=true \
