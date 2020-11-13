@@ -70,6 +70,8 @@ ADD https://raw.githubusercontent.com/SebDanielsson/dark-combustion/master/main.
 
 COPY root/ .
 
+EXPOSE 9091
+
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     GLOBAL_APPLY_PERMISSIONS=true \
     TRANSMISSION_ALT_SPEED_DOWN=50 \
