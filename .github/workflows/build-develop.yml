@@ -35,7 +35,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
-
+      -
+        name: Login to Bintray
+        uses: docker/login-action@v1
+        with:
+          registry: vidurb-docker-transmission-wireguard.bintray.io
+          username: ${{ secrets.BINTRAY_USERNAME }}
+          password: ${{ secrets.BINTRAY_APIKEY }}
       -
         name: Build and push
         uses: docker/build-push-action@v2
@@ -47,3 +53,4 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/transmission-wireguard:latest
             ghcr.io/${{ github.repository_owner }}/transmission-wireguard:latest
+            vidurb-docker-transmission-wireguard.bintray.io/transmission-wireguard:latest
