@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
+
+dockerize -template /etc/privoxy/config.tmpl:/etc/privoxy/config
+echo "Privoxy configuration file generated at /etc/privoxy/config"

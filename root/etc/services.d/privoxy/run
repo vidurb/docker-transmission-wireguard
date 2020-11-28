@@ -7,7 +7,7 @@ if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
 fi
 
 if [ "$RUN_AS" = root ]; then
-    ssserver -c /etc/shadowsocks.json
+    privoxy --no-daemon /etc/privoxy/config
 else
-    s6-setuidgid "$RUN_AS" ssserver -c /etc/shadowsocks.json
+    s6-setuidgid "$RUN_AS" privoxy --no-daemon /etc/privoxy/config
 fi

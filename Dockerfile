@@ -23,8 +23,6 @@ ENV DOCKERIZE_FILENAME dockerize-linux-armel-${DOCKERIZE_VERSION}.tar.gz
 ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
 ENV S6_FILENAME s6-overlay-arm.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
-ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-musleabi.tar.xz
-ENV SHADOWSOCKS_URL https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SHADOWSOCKS_VERSION}/${SHADOWSOCKS_FILENAME}
 
 FROM base as base-armv7
 
@@ -32,8 +30,6 @@ ENV DOCKERIZE_FILENAME dockerize-linux-armhf-${DOCKERIZE_VERSION}.tar.gz
 ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
 ENV S6_FILENAME s6-overlay-armhf.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
-ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-musleabihf.tar.xz
-ENV SHADOWSOCKS_URL https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SHADOWSOCKS_VERSION}/${SHADOWSOCKS_FILENAME}
 
 FROM base as base-arm64
 
@@ -41,8 +37,6 @@ ENV DOCKERIZE_FILENAME dockerize-linux-armhf-${DOCKERIZE_VERSION}.tar.gz
 ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
 ENV S6_FILENAME s6-overlay-aarch64.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
-ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.aarch64-unknown-linux-gnu.tar.xz
-ENV SHADOWSOCKS_URL https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SHADOWSOCKS_VERSION}/${SHADOWSOCKS_FILENAME}
 
 
 ARG TARGETARCH
@@ -53,18 +47,14 @@ ADD ${S6_URL} /
 
 ADD ${DOCKERIZE_URL} /
 
-ADD ${SHADOWSOCKS_URL} /
 
 ADD https://github.com/Secretmapper/combustion/archive/release.zip /
 
 RUN tar xzvf ${S6_FILENAME} \
     && rm ${S6_FILENAME} \
-    && tar xvf ${SHADOWSOCKS_FILENAME} \
-    && mv sslocal ssmanager ssserver ssurl /usr/local/bin \
-    && rm ${SHADOWSOCKS_FILENAME} \
     && tar -C /usr/local/bin -xzvf ${DOCKERIZE_FILENAME} \
     && rm ${DOCKERIZE_FILENAME} \
-    && apk add --no-cache --update wireguard-tools transmission-daemon unzip \
+    && apk add --no-cache --update wireguard-tools transmission-daemon unzip privoxy \
     && rm -rf /usr/share/transmission/web/* \
     && unzip /release.zip \
     && ls /combustion-release \
@@ -152,14 +142,11 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     TRANSMISSION_WATCH_DIR_ENABLED=true \
     TRANSMISSION_HOME=/data/transmission-home \
     TRANSMISSION_WATCH_DIR_FORCE_GENERIC=false \
-    SHADOWSOCKS_SERVER_PORT=8388 \
-    SHADOWSOCKS_LOCAL_PORT=1080 \
-    SHADOWSOCKS_PASSWORD=shadowsocks \
+    PRIVOXY_PORT=8388 \
     PUID= \
     PGID= \
     INTERFACE=wg0 \
     KILLSWITCH= \
-    OVERWRITE_CONFIGURATION= \
-    OVERWRITE_SHADOWSOCKS_CONFIGURATION=
+    OVERWRITE_CONFIGURATION= 
 
 ENTRYPOINT ["/init"]
