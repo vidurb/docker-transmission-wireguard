@@ -1,0 +1,9 @@
+{
+    "server":"{{ .Env.HOSTNAME }}",
+    "server_port":{{ .Env.SHADOWSOCKS_SERVER_PORT }},
+    "local_port":{{ .Env.SHADOWSOCKS_LOCAL_PORT }},
+    "password":"{{ .Env.SHADOWSOCKS_PASSWORD }}",
+    "timeout":300,
+    "method":"aes-256-cfb",
+    "fast_open": true
+}

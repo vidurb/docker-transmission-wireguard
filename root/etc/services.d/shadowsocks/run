@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv sh
+# shellcheck shell=sh
+
+RUN_AS=root
+if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
+  RUN_AS=twg_user;
+fi
+
+if [ "$RUN_AS" = root ]; then
+    ssserver -c /etc/shadowsocks.json
+else
+    s6-setuidgid "$RUN_AS" ssserver -c /etc/shadowsocks.json
+fi
