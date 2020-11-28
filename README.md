@@ -2,8 +2,9 @@
 
 A Docker/OCI image running the Transmission BitTorrent client through a WireGuard tunnel.
 
-This image is currently only tested on the `amd64` architecture.
-Please exercise caution when using it on other architectures.
+This image is tested on the `amd64` and `arm64` architectures (thanks to Ruben Plugge).
+Although it is built for other architectures as well, please exercise caution when using it on untested architectures.
+
 
 Built using GitHub Actions: 
 
