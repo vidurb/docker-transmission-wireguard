@@ -5,13 +5,16 @@ A Docker/OCI image running the Transmission BitTorrent client through a WireGuar
 This image is tested on the `amd64` and `arm64` architectures (thanks to Ruben Plugge).
 Although it is built for other architectures as well, please exercise caution when using it on untested architectures.
 
+Now that Docker Hub has implemented usage restrictions, you might want to use an alternative. This image is also hosted on
+the GitHub Container Registry at `ghcr.io/vidurb/transmission-wireguard`.
+
 
 Built using GitHub Actions: 
 
-![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-release?label=Versioned%20Build&style=social&logo=github-actions)
+![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-transmission-wireguard/build-release?label=Versioned%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=semver&style=social&logo=docker)
 
-![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-wireguard-transmission/build-develop?label=Development%20Build&style=social&logo=github-actions)
+![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-transmission-wireguard/build-develop?label=Development%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=date&style=social&logo=docker)
 
 ## Features:
