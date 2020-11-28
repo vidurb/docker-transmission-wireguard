@@ -24,6 +24,7 @@ this point in time)
 - Generates the transmission configuration file from environment variables (as
 described below).
 - Can be run with the `cap_add` and `sysctls` directive instead of `privileged`.
+- Runs a Privoxy proxy through WireGuard for convenient usage with other software.
 
 ### To-Do:
 - [x] Test whether the image can be run without `privileged` mode by using `cap_add`
@@ -186,7 +187,7 @@ services:
 | TRANSMISSION_WATCH_DIR_ENABLED  | true  | Enable `TRANSMISSION_WATCH_DIR` |
 | TRANSMISSION_HOME  | /data/transmission-home  | Transmission home dir |
 | TRANSMISSION_WATCH_DIR_FORCE_GENERIC  | false  | Force scanning of watch dir every 10 seconds (use if the watch dir is not working) |
-
+| PRIVOXY_PORT  | 8388  | Port to expose Privoxy proxy on |
 # Acknowledgements
 
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
