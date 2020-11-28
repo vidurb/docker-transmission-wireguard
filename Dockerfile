@@ -1,8 +1,8 @@
 FROM --platform=$TARGETPLATFORM alpine:3.12 as base
 
 LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
-LABEL org.label-schema.url=https://github.com/vidurb/docker-wireguard-transmission
-LABEL org.label-schema.name=wireguard-transmission
+LABEL org.label-schema.url=https://github.com/vidurb/docker-transmission-wireguard
+LABEL org.label-schema.name=transmission-wireguard
 
 ENV DOCKERIZE_VERSION=v0.6.1 \
     S6_VERSION=v2.1.0.2 \
@@ -23,7 +23,7 @@ ENV DOCKERIZE_FILENAME dockerize-linux-armel-${DOCKERIZE_VERSION}.tar.gz
 ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
 ENV S6_FILENAME s6-overlay-arm.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
-ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-muslabi.tar.xz
+ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-musleabi.tar.xz
 ENV SHADOWSOCKS_URL https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SHADOWSOCKS_VERSION}/${SHADOWSOCKS_FILENAME}
 
 FROM base as base-armv7
@@ -32,7 +32,7 @@ ENV DOCKERIZE_FILENAME dockerize-linux-armhf-${DOCKERIZE_VERSION}.tar.gz
 ENV DOCKERIZE_URL https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/${DOCKERIZE_FILENAME}
 ENV S6_FILENAME s6-overlay-armhf.tar.gz
 ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/${S6_FILENAME}
-ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-muslabihf.tar.xz
+ENV SHADOWSOCKS_FILENAME shadowsocks-${SHADOWSOCKS_VERSION}.arm-unknown-linux-musleabihf.tar.xz
 ENV SHADOWSOCKS_URL https://github.com/shadowsocks/shadowsocks-rust/releases/download/${SHADOWSOCKS_VERSION}/${SHADOWSOCKS_FILENAME}
 
 FROM base as base-arm64
