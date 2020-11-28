@@ -53,10 +53,14 @@ ADD ${S6_URL} /
 
 ADD ${DOCKERIZE_URL} /
 
+ADD ${SHADOWSOCKS_URL} /
+
 ADD https://github.com/Secretmapper/combustion/archive/release.zip /
 
 RUN tar xzvf ${S6_FILENAME} \
     && rm ${S6_FILENAME} \
+    && tar xvf ${SHADOWSOCKS_FILENAME} \
+    && mv sslocal ssmanager ssserver ssurl /usr/local/bin \
     && tar -C /usr/local/bin -xzvf ${DOCKERIZE_FILENAME} \
     && rm ${DOCKERIZE_FILENAME} \
     && apk add --no-cache --update wireguard-tools transmission-daemon unzip \
