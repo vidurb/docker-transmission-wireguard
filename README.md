@@ -53,11 +53,12 @@ in the examples below accordingly if you choose to change the structure.
 * Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
 required to be set for the WireGuard tunnel to work.
 * If your WireGuard configuration tunnels IPv6 traffic as well, you may encounter problems.
-The simplest solution is to simply remove `::/0` from your WireGuard configuration. I'm working
-on an alternative.
+The simplest solution is to simply remove `::/0` from your WireGuard configuration. 
+You may get a error that mentions `RTNETLINK`, this can be fixed by adding 
+`net.ipv6.conf.all.disable_ipv6=0` as a sysctl.
 * Also, in order for the container's web UI to be accessible from other docker 
 containers or your local network, you may need to add something similar to the 
-following to your wireguard configuration.
+following to your wireguard configuration under the `[Interface`] section.
 
 ```
 PostUp = DROUTE=$(ip route | grep default | awk '{print $3}'); HOMENET=192.168.0.0/16; HOMENET2=10.0.0.0/8; HOMENET3=172.16.0.0/12; ip route add $HOMENET3 via $DROUTE;ip route add $HOMENET2 via $DROUTE; ip route add $HOMENET via $DROUTE;iptables -I OUTPUT -d $HOMENET -j ACCEPT;iptables -A OUTPUT -d $HOMENET2 -j ACCEPT; iptables -A OUTPUT -d $HOMENET3 -j ACCEPT;  iptables -A OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
