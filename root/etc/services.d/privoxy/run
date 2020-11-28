@@ -1,13 +1,4 @@
 #!/usr/bin/with-contenv sh
 # shellcheck shell=sh
 
-RUN_AS=root
-if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
-  RUN_AS=twg_user;
-fi
-
-if [ "$RUN_AS" = root ]; then
-    privoxy --no-daemon /etc/privoxy/config
-else
-    s6-setuidgid "$RUN_AS" privoxy --no-daemon /etc/privoxy/config
-fi
+s6-setuidgid privoxy privoxy --no-daemon /etc/privoxy/config
