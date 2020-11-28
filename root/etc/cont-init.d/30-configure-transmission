@@ -13,7 +13,7 @@ if [ -n "$KILLSWITCH" ]; then
   export TRANSMISSION_BIND_ADDRESS_IPV6
 fi
 
-if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -z "$OVERWRITE_TRANSMISSION_CONFIGURATION" ]; then
+if [ -e "$TRANSMISSION_HOME/settings.json" ] && [ -z "$OVERWRITE_CONFIGURATION" ]; then
   echo "Transmission configuration file not generated as a file exists at $TRANSMISSION_HOME/settings.json"
 else
   if [ ! -d "$TRANSMISSION_HOME" ]; then 
