@@ -1,9 +1,5 @@
 FROM --platform=$TARGETPLATFORM alpine:3.12 as base
 
-LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
-LABEL org.label-schema.url=https://github.com/vidurb/docker-transmission-wireguard
-LABEL org.label-schema.name=transmission-wireguard
-
 ENV DOCKERIZE_VERSION=v0.6.1 \
     S6_VERSION=v2.1.0.2 \
     SHADOWSOCKS_VERSION=v1.8.23
@@ -42,6 +38,10 @@ ENV S6_URL https://github.com/just-containers/s6-overlay/releases/download/${S6_
 ARG TARGETARCH
 ARG TARGETVARIANT
 FROM base-${TARGETARCH}${TARGETVARIANT}
+
+LABEL maintainer "Vidur Butalia <vidurbutalia@gmail.com>"
+LABEL org.label-schema.url=https://github.com/vidurb/docker-transmission-wireguard
+LABEL org.label-schema.name=transmission-wireguard
 
 ADD ${S6_URL} /
 
