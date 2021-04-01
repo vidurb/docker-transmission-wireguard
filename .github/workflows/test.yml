@@ -1,0 +1,11 @@
+name: test-workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo SHA
+        run: echo ${{ github.sha }}
