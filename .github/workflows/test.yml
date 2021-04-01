@@ -9,3 +9,14 @@ jobs:
     steps:
       - name: Echo SHA
         run: echo ${{ github.sha }}
+      - 
+        name: Get the tag name from tag reference - not checked out
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      - 
+        name: Get the tag name from tag reference - checked out
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
