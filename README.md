@@ -7,7 +7,7 @@ Although it is built for other architectures as well, please exercise caution wh
 
 Now that Docker Hub has implemented usage restrictions, you might want to use an alternative. This image is also hosted on
 the GitHub Container Registry at `ghcr.io/vidurb/transmission-wireguard`, as well as on the Amazon Elastic Container Registry
-at `public.ecr.aws/t0n7w8o1/docker-transmission-wireguard`
+at `public.ecr.aws/t0n7w8o1/transmission-wireguard`
 
 Built using GitHub Actions:
 
