@@ -18,6 +18,7 @@ Built using GitHub Actions:
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=date&style=social&logo=docker)
 
 ## Features:
+
 - Runs `transmission-daemon` (latest version) on Alpine Linux
 - WireGuard tunnel is set up using `wg-quick` & a mounted configuration file
 - Uses the [combustion](https://github.com/Secretmapper/combustion) web UI and the excellent [dark theme](https://github.com/SebDanielsson/dark-combustion) for the same.
@@ -30,48 +31,50 @@ described below).
 - Runs a Privoxy proxy through WireGuard for convenient usage with other software.
 
 ### To-Do:
+
 - [x] Test whether the image can be run without `privileged` mode by using `cap_add`
 to add specific capabilities for greater security.
 
 ## Usage
 
-* Mount your WireGuard configuration file into the `/etc/wireguard/` folder and
+1. Mount your WireGuard configuration file into the `/etc/wireguard/` folder and
  set the name of the file (without the extension) as the `INTERFACE` environment
   variable.
-* You can either choose to mount your settings file into the container or
+2. You can either choose to mount your settings file into the container or
  configure Transmission using environment variables. 
-    * To mount your settings file into the container, set a bind mount for 
+    - To mount your settings file into the container, set a bind mount for 
     `$TRANSMISSION_HOME/settings.json`. (Replace `$TRANSMISSION_HOME` with the
     default value as given below or whatever custom value you choose.)
-    * To configure Transmission using environment variables, set variables for
+    - To configure Transmission using environment variables, set variables for
     the settings that you'd like to change from the defaults (see the table
     below for reference). Setting the `TRANSMISSION_RPC_PASSWORD` and
     `TRANSMISSION_RPC_USERNAME` at the very least is recommended.
-    * Once a configuration file has been generated, the container will not
+    - Once a configuration file has been generated, the container will not
     regenerate the file unless `OVERWRITE_CONFIGURATION` is passed in.
-    * It's simplest to modify Transmission settings using the web UI.
-* Setting the `KILLSWITCH` variable to any value will ensure Transmission only
+    - It's simplest to modify Transmission settings using the web UI.
+3. Setting the `KILLSWITCH` variable to any value will ensure Transmission only
 runs through the WireGuard tunnel.
-* By default, download-related folders are in `/data` and transmission's
+4. By default, download-related folders are in `/data` and transmission's
 configuration directory is `/data/transmission-home`. Please adjust the mounts
 in the examples below accordingly if you choose to change the structure.
-* Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
+5. Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
 required to be set for the WireGuard tunnel to work.
-* If your WireGuard configuration tunnels IPv6 traffic as well, you may encounter problems.
+6. If your WireGuard configuration tunnels IPv6 traffic as well, you may encounter problems.
 The simplest solution is to simply remove `::/0` from your WireGuard configuration. 
 You may get a error that mentions `RTNETLINK`, this can be fixed by adding 
 `net.ipv6.conf.all.disable_ipv6=0` as a sysctl.
-* Also, in order for the container's web UI to be accessible from other docker 
+7/ Also, in order for the container's web UI to be accessible from other docker 
 containers or your local network, you may need to add something similar to the 
 following to your wireguard configuration under the `[Interface`] section.
 
-```
+``` wireguard
 PostUp = DROUTE=$(ip route | grep default | awk '{print $3}'); HOMENET=192.168.0.0/16; HOMENET2=10.0.0.0/8; HOMENET3=172.16.0.0/12; ip route add $HOMENET3 via $DROUTE;ip route add $HOMENET2 via $DROUTE; ip route add $HOMENET via $DROUTE;iptables -I OUTPUT -d $HOMENET -j ACCEPT;iptables -A OUTPUT -d $HOMENET2 -j ACCEPT; iptables -A OUTPUT -d $HOMENET3 -j ACCEPT;  iptables -A OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT
 PreDown = HOMENET=192.168.0.0/16; HOMENET2=10.0.0.0/8; HOMENET3=172.16.0.0/12; ip route del $HOMENET3 via $DROUTE;ip route del $HOMENET2 via $DROUTE; ip route del $HOMENET via $DROUTE; iptables -D OUTPUT ! -o %i -m mark ! --mark $(wg show %i fwmark) -m addrtype ! --dst-type LOCAL -j REJECT; iptables -D OUTPUT -d $HOMENET -j ACCEPT; iptables -D OUTPUT -d $HOMENET2 -j ACCEPT; iptables -D OUTPUT -d $HOMENET3 -j ACCEPT
 ```
 
 ### docker run
-```
+
+```shell
 docker run --name wireguard-transmission \
 --cap-add=NET_ADMIN \
 --sysctl net.ipv4.conf.all.src_valid_mark=1 \
@@ -87,7 +90,8 @@ vidurb/wireguard-transmission
 ```
 
 ### docker-compose.yml
-```
+
+```docker-compose
 version: '3.7'
 services:
     wireguard-transmission:
@@ -110,7 +114,7 @@ services:
             - '/path/to/transmission-dir:/data'
 ```
 
-# Environment Variables
+## Environment Variables
 
 | Variable  | Default | Description |
 | ------------- | ------------- | ------------- |
@@ -191,7 +195,8 @@ services:
 | TRANSMISSION_HOME  | /data/transmission-home  | Transmission home dir |
 | TRANSMISSION_WATCH_DIR_FORCE_GENERIC  | false  | Force scanning of watch dir every 10 seconds (use if the watch dir is not working) |
 | PRIVOXY_PORT  | 8388  | Port to expose Privoxy proxy on |
-# Acknowledgements
+
+## Acknowledgements
 
 Forked from SebDanielsson's [image](https://github.com/SebDanielsson/docker-wireguard-transmission),
 and with Haugene's [image](https://github.com/haugene/docker-transmission-openvpn) as a source for some feature additions. Many thanks to them & all contributors to their repositories.
