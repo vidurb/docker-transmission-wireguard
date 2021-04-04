@@ -41,8 +41,8 @@ to add specific capabilities for greater security.
  set the name of the file (without the extension) as the `INTERFACE` environment
   variable.
 2. You can either choose to mount your settings file into the container or
- configure Transmission using environment variables. 
-    - To mount your settings file into the container, set a bind mount for 
+ configure Transmission using environment variables.
+    - To mount your settings file into the container, set a bind mount for
     `$TRANSMISSION_HOME/settings.json`. (Replace `$TRANSMISSION_HOME` with the
     default value as given below or whatever custom value you choose.)
     - To configure Transmission using environment variables, set variables for
@@ -60,11 +60,11 @@ in the examples below accordingly if you choose to change the structure.
 5. Note that the `NET_ADMIN` capability and `net.ipv4.conf.all.src_valid_mark` are
 required to be set for the WireGuard tunnel to work.
 6. If your WireGuard configuration tunnels IPv6 traffic as well, you may encounter problems.
-The simplest solution is to simply remove `::/0` from your WireGuard configuration. 
-You may get a error that mentions `RTNETLINK`, this can be fixed by adding 
+The simplest solution is to simply remove `::/0` from your WireGuard configuration.
+You may get a error that mentions `RTNETLINK`, this can be fixed by adding
 `net.ipv6.conf.all.disable_ipv6=0` as a sysctl.
-7/ Also, in order for the container's web UI to be accessible from other docker 
-containers or your local network, you may need to add something similar to the 
+7/ Also, in order for the container's web UI to be accessible from other docker
+containers or your local network, you may need to add something similar to the
 following to your wireguard configuration under the `[Interface`] section.
 
 ``` wireguard
@@ -134,7 +134,7 @@ services:
 | TRANSMISSION_BIND_ADDRESS_IPV4  | 0.0.0.0  | Force Transmission to bind to a particular IP |
 | TRANSMISSION_BIND_ADDRESS_IPV6  | ::  | Force Transmission to bind to a particular IP |
 | TRANSMISSION_BLOCKLIST_ENABLED  | false  | Enable blocking of peers based on blocklist |
-| TRANSMISSION_BLOCKLIST_URL  | http://www.example.com/blocklist  | Blocklist URL |
+| TRANSMISSION_BLOCKLIST_URL  | `http://www.example.com/blocklist`  | Blocklist URL |
 | TRANSMISSION_CACHE_SIZE_MB  | 4  | Transmission's disk cache size (megabytes) |
 | TRANSMISSION_DHT_ENABLED  | true  | Enable BitTorrent DHT |
 | TRANSMISSION_DOWNLOAD_DIR  | /data/completed  | Folder to move completed downloads to |
