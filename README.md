@@ -6,10 +6,10 @@ This image is tested on the `amd64` and `arm64` architectures (thanks to @ByteBi
 Although it is built for other architectures as well, please exercise caution when using it on untested architectures.
 
 Now that Docker Hub has implemented usage restrictions, you might want to use an alternative. This image is also hosted on
-the GitHub Container Registry at `ghcr.io/vidurb/transmission-wireguard`.
+the GitHub Container Registry at `ghcr.io/vidurb/transmission-wireguard`, as well as on the Amazon Elastic Container Registry
+at `public.ecr.aws/t0n7w8o1/docker-transmission-wireguard`
 
-
-Built using GitHub Actions: 
+Built using GitHub Actions:
 
 ![GitHub Workflow Status - build-release](https://img.shields.io/github/workflow/status/vidurb/docker-transmission-wireguard/build-release?label=Versioned%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest semver)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=semver&style=social&logo=docker)
@@ -17,7 +17,7 @@ Built using GitHub Actions:
 ![GitHub Workflow Status - build-develop](https://img.shields.io/github/workflow/status/vidurb/docker-transmission-wireguard/build-develop?label=Development%20Build&style=social&logo=github-actions)
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/vidurb/transmission-wireguard?sort=date&style=social&logo=docker)
 
-## Features:
+## Features
 
 - Runs `transmission-daemon` (latest version) on Alpine Linux
 - WireGuard tunnel is set up using `wg-quick` & a mounted configuration file
@@ -30,7 +30,7 @@ described below).
 - Can be run with the `cap_add` and `sysctls` directive instead of `privileged`.
 - Runs a Privoxy proxy through WireGuard for convenient usage with other software.
 
-### To-Do:
+### To-Do
 
 - [x] Test whether the image can be run without `privileged` mode by using `cap_add`
 to add specific capabilities for greater security.
