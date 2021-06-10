@@ -5,6 +5,8 @@ A Docker/OCI image running the Transmission BitTorrent client through a WireGuar
 This image is tested on the `amd64` and `arm64` architectures (thanks to @ByteBitten).
 Although it is built for other architectures as well, please exercise caution when using it on untested architectures.
 
+**UPDATE: If you were encountering problems using Privoxy, they are fixed in v1.3.1**
+
 Now that Docker Hub has implemented usage restrictions, you might want to use an alternative. This image is also hosted on
 the GitHub Container Registry at `ghcr.io/vidurb/transmission-wireguard`, as well as on the Amazon Elastic Container Registry
 at `public.ecr.aws/t0n7w8o1/transmission-wireguard`
