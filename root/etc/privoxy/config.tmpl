@@ -784,7 +784,7 @@ logfile logfile
 #
 #        listen-address [::1]:8118
 #
-listen-address  {{ .Env.PRIVOXY_PORT }}
+listen-address  0.0.0.0:{{ .Env.PRIVOXY_PORT }}
 #
 #  4.2. toggle
 #  ============
