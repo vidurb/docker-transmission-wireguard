@@ -382,9 +382,9 @@ logdir /var/log/privoxy
 #      configuration for ad blocking, cookie management, privacy
 #      considerations, etc.
 #
-actionsfile match-all.action # Actions that are applied to all sites and maybe overruled later on.
-actionsfile default.action   # Main actions file
-actionsfile user.action      # User customizations
+actionsfile match-all.action.new # Actions that are applied to all sites and maybe overruled later on.
+actionsfile default.action.new   # Main actions file
+actionsfile user.action.new      # User customizations
 #actionsfile regression-tests.action     # Tests for privoxy-regression-test
 #
 #  2.6. filterfile
@@ -429,8 +429,8 @@ actionsfile user.action      # User customizations
 #      It is recommended to place any locally adapted filters into a
 #      separate file, such as user.filter.
 #
-filterfile default.filter
-filterfile user.filter      # User customizations
+filterfile default.filter.new
+filterfile user.filter.new      # User customizations
 #
 #  2.7. logfile
 #  =============
