@@ -98,9 +98,9 @@ vidurb/wireguard-transmission
 ```docker-compose
 version: '3.7'
 services:
-    wireguard-transmission:
-        image: vidurb/wireguard-transmission
-        container_name: wireguard-transmission
+    transmission-wireguard:
+        image: ghcr.io/vidurb/transmission-wireguard
+        container_name: transmission-wireguard
         environment:
             - TRANSMISSION_RPC_USERNAME=transmission
             - TRANSMISSION_RPC_PASSWORD=transmission
