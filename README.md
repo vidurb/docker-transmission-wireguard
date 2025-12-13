@@ -67,6 +67,28 @@ Place your WireGuard configuration file (e.g., `wg0.conf`) in the `wireguard` di
 
 The Transmission configuration files are located in the `transmission` directory. You can modify the `settings.json` file to customize your Transmission settings.
 
+You can may modify the Transmission uid:gid using an entrypoint script:
+
+```yaml
+version: "3"
+services:
+  transmission-wireguard:
+    image: ghcr.io/vidurb/transmission-wireguard
+    ...
+    entrypoint: /entrypoint.sh
+    configs:
+      - source: entrypoint
+        target: /entrypoint.sh
+        mode: 0555
+configs:
+  entrypoint:
+    content: |
+      addgroup -g 1000 tuser || true
+      adduser -D -u 1000 -G tuser tuser || true
+      echo 'command_user="tuser:tuser"' >> /etc/conf.d/transmission-daemon
+      exec "$@"
+```
+
 ## Ports
 
 - `9091`: Transmission web UI
